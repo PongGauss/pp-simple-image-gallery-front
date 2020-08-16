@@ -1,6 +1,6 @@
 <template>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-        <a class="navbar-brand" href="#">Top navbar</a>
+        <a class="navbar-brand" href="#">Simple Gallery</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -12,17 +12,8 @@
                 <router-link class="nav-item" to="/gallery" activeClass="active" tag="li">
                     <a class="nav-link">Gallery</a>
                 </router-link>
-                <!-- <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                </li> -->
             </ul>
-            <ul class="navbar-nav">
+            <ul class="navbar-nav" v-if="!checkAccessTokenExisting">
                 <router-link class="nav-item" to="/login" activeClass="active" tag="li">
                     <a class="nav-link">Login</a>
                 </router-link>
@@ -30,6 +21,29 @@
                     <a class="nav-link">Register</a>
                 </router-link>
             </ul>
+            <ul class="navbar-nav" v-else>
+                <router-link class="nav-item" to="/logout" activeClass="active" tag="li">
+                    <a class="nav-link">Logout</a>
+                </router-link>
+            </ul>
         </div>
     </nav>
 </template>
+
+<script>
+    export default {
+        name: 'Header',
+        data() {
+            return {
+                isAccessToken: false,
+            }
+        },
+        computed: {
+            // a computed getter
+            checkAccessTokenExisting: function () {
+                // `this` points to the vm instance
+                return this.$store.state.auth.accessToken != null;
+            }
+        }
+    }
+</script>
