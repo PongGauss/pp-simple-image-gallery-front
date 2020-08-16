@@ -90,10 +90,9 @@
                     email: this.email,
                     password: this.password
                 }).then((result) => {
-                    //console.log(result.message.accessToken)
                     this.$store.dispatch('saveToken', result.message.accessToken)
+                    this.$store.dispatch('retrieveUserInfo', result.message.accessToken)
                     this.$router.push('/home')
-                    //commit('SET_TOKEN', result.message.accessToken);
                 }).catch(() => {
                     this.loginFailed = true
                 })

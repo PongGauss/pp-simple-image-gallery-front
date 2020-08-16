@@ -19,6 +19,7 @@
     },
     created() {
       this.$store.dispatch('loadAccessToken');
+      this.$store.dispatch('loadUserName');
     }
   }
 </script>

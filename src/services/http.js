@@ -33,9 +33,11 @@ class HttpRequester {
         this.axiosInstance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
     }
 
-    get (methodName, data) {
+    get (methodName, data, header) {
         return this.axiosInstance.get(methodName, {
             params: data
+        }, {
+            header
         })
     }
 
@@ -54,10 +56,10 @@ class HttpRequester {
         })
     }
 
-    request (type, url, data) {
+    request (type, url, data, header) {
         let promise = null
         switch (type) {
-            case 'GET': promise = axios.get(url, { params: data }); break
+            case 'GET': promise = axios.get(url, { params: data }, header); break
             case 'POST': promise = axios.post(url, data); break
             case 'PUT': promise = axios.put(url, data); break
             case 'DELETE': promise = axios.delete(url, data); break

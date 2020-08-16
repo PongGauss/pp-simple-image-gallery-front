@@ -23,7 +23,7 @@
             </ul>
             <ul class="navbar-nav" v-else>
                 <router-link class="nav-item" to="/logout" activeClass="active" tag="li">
-                    <a class="nav-link">Logout</a>
+                    <a class="nav-link" v-html="checkUserNameExisting"></a>
                 </router-link>
             </ul>
         </div>
@@ -36,6 +36,7 @@
         data() {
             return {
                 isAccessToken: false,
+                logoutBTN: "",
             }
         },
         computed: {
@@ -43,6 +44,10 @@
             checkAccessTokenExisting: function () {
                 // `this` points to the vm instance
                 return this.$store.state.auth.accessToken != null;
+            },
+            checkUserNameExisting: function () {
+                // `this` points to the vm instance
+                return `Hi! ${this.$store.state.auth.userName}, Logout`;
             }
         }
     }
